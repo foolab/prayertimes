@@ -22,6 +22,7 @@
 #include <QQmlError>
 #include <QScopedPointer>
 #include <QDebug>
+#include "settings.h"
 
 Q_DECL_EXPORT int
 main(int argc, char *argv[]) {
@@ -37,6 +38,8 @@ main(int argc, char *argv[]) {
   QQmlContext *rootContext = engine->rootContext();
 
   QObject::connect(engine, SIGNAL(quit()), app.data(), SLOT(quit()));
+
+  qmlRegisterType<Settings>("Harbour.Prayer", 1, 0, "Settings");
 
   view->setSource(QUrl("qrc:/qml/main.qml"));
   if (view->status() == QQuickView::Error) {

@@ -17,7 +17,13 @@
 
 import QtQuick 2.1
 import Sailfish.Silica 1.0
+import Harbour.Prayer 1.0
 
 ApplicationWindow {
     cover: undefined
+
+    Settings {
+        id: settings
+    }
+
 }
