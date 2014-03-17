@@ -11,10 +11,12 @@ INCLUDEPATH += ../prayertimes/
 DEPENDPATH += ../prayertimes/
 
 SOURCES += main.cpp \
-           settings.cpp
+           settings.cpp \
+           prayertimecalculator.cpp
 
 HEADERS += prayertimes.hpp \
-           settings.h
+           settings.h \
+           prayertimecalculator.h
 
 RESOURCES += ../qml/qml.qrc
 

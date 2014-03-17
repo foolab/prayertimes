@@ -23,6 +23,7 @@
 #include <QScopedPointer>
 #include <QDebug>
 #include "settings.h"
+#include "prayertimecalculator.h"
 
 Q_DECL_EXPORT int
 main(int argc, char *argv[]) {
@@ -40,6 +41,7 @@ main(int argc, char *argv[]) {
   QObject::connect(engine, SIGNAL(quit()), app.data(), SLOT(quit()));
 
   qmlRegisterType<Settings>("Harbour.Prayer", 1, 0, "Settings");
+  qmlRegisterType<PrayerTimeCalculator>("Harbour.Prayer", 1, 0, "PrayerTimeCalculator");
 
   view->setSource(QUrl("qrc:/qml/main.qml"));
   if (view->status() == QQuickView::Error) {

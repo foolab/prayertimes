@@ -22,6 +22,10 @@ import Harbour.Prayer 1.0
 ApplicationWindow {
     cover: undefined
 
+    initialPage: Component {
+        MainPage { }
+    }
+
     Settings {
         id: settings
     }
