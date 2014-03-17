@@ -36,16 +36,15 @@ PrayerTimeCalculator::~PrayerTimeCalculator() {
 
 }
 
-void PrayerTimeCalculator::calculate(qreal longitude, qreal latitude, int calculationMethod) {
+void PrayerTimeCalculator::calculate(qreal longitude, qreal latitude, int altitude, int calculationMethod) {
   prayertimes::PrayerTimes times;
-  qreal elevation = 0;
   time_t date = time(NULL);
   qreal timezone = prayertimes::PrayerTimes::get_timezone(date);
   qDebug() << timezone;
   double output[prayertimes::TimesCount];
 
   times.set_calc_method(static_cast<prayertimes::CalculationMethod>(calculationMethod));
-  times.get_prayer_times(date, latitude, longitude, elevation, timezone, output);
+  times.get_prayer_times(date, latitude, longitude, altitude, timezone, output);
   m_times.clear();
 
   QList<int> positions;

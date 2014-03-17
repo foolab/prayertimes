@@ -26,9 +26,10 @@
   .arg(QDir::separator()) \
   .arg(QCoreApplication::instance()->applicationName())
 
-#define DEFAULT_LONGITUDE               qreal(31.233333)
-#define DEFAULT_LATITUDE                qreal(30.05)
+#define DEFAULT_LOCATION_LONGITUDE      qreal(31.233333)
+#define DEFAULT_LOCATION_LATITUDE       qreal(30.05)
 #define DEFAULT_LOCATION_NAME           "Cairo"
+#define DEFAULT_LOCATION_ALTITUDE       29
 #define DEFAULT_CALCULATION_METHOD      int(prayertimes::Egypt)
 
 Settings::Settings(QObject *parent) :
@@ -41,7 +42,7 @@ Settings::~Settings() {
 }
 
 qreal Settings::longitude() const {
-  return value("location/longitude", DEFAULT_LONGITUDE).toReal();
+  return value("location/longitude", DEFAULT_LOCATION_LONGITUDE).toReal();
 }
 
 void Settings::setLongitude(qreal longitude) {
@@ -52,7 +53,7 @@ void Settings::setLongitude(qreal longitude) {
 }
 
 qreal Settings::latitude() const {
-  return value("location/latitude", DEFAULT_LATITUDE).toReal();
+  return value("location/latitude", DEFAULT_LOCATION_LATITUDE).toReal();
 }
 
 void Settings::setLatitude(qreal latitude) {
@@ -70,6 +71,17 @@ void Settings::setLocationName(const QString& locationName) {
   if (Settings::locationName() != locationName) {
     setValue("location/name", locationName);
     emit locationNameChanged();
+  }
+}
+
+int Settings::locationAltitude() const {
+  return value("location/altitude", DEFAULT_LOCATION_ALTITUDE).toInt();
+}
+
+void Settings::setLocationAltitude(int locationAltitude) {
+  if (Settings::locationAltitude() != locationAltitude) {
+    setValue("location/altitude", locationAltitude);
+    emit locationAltitudeChanged();
   }
 }
 

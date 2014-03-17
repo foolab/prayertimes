@@ -23,7 +23,7 @@ Page {
 
     PrayerTimeCalculator {
         id: calculator
-        Component.onCompleted: calculate(settings.longitude, settings.latitude, settings.calculationMethod)
+        Component.onCompleted: calculate(settings.longitude, settings.latitude, settings.altitude, settings.calculationMethod)
     }
 
     SilicaFlickable {

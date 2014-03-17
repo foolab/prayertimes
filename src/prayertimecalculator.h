@@ -45,7 +45,7 @@ public:
   QDateTime ishaTime() const;
 
 public slots:
-  void calculate(qreal longitude, qreal latitude, int calculationMethod);
+  void calculate(qreal longitude, qreal latitude, int altitude, int calculationMethod);
 
 signals:
   void prayerTimesChanged();
