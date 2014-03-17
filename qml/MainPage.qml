@@ -26,7 +26,41 @@ Page {
         Component.onCompleted: calculate(settings.longitude, settings.latitude, settings.altitude, settings.calculationMethod)
     }
 
-    SilicaFlickable {
+    property list<QtObject> prayerModel: [
+        QtObject {
+            property variant stamp: calculator.fajrTime
+            property string name: qsTr("Fajr")
+            property bool nextDay
+        },
+        QtObject {
+            property variant stamp: calculator.sunriseTime
+            property string name: qsTr("Sunrise")
+            property bool nextDay
+        },
+        QtObject {
+            property variant stamp: calculator.dhuhrTime
+            property string name: qsTr("Dhuhr")
+            property bool nextDay
+        },
+        QtObject {
+            property variant stamp: calculator.asrTime
+            property string name: qsTr("Asr")
+            property bool nextDay
+        },
+        QtObject {
+            property variant stamp: calculator.maghribTime
+            property string name: qsTr("Maghrib")
+            property bool nextDay
+        },
+        QtObject {
+            property variant stamp: calculator.ishaTime
+            property string name: qsTr("Isha")
+            property bool nextDay
+        }
+    ]
+
+    SilicaListView {
+        id: view
         anchors.fill: parent
 
         PullDownMenu {
@@ -35,92 +69,48 @@ Page {
             MenuItem { text: qsTr("Settings"); onClicked: Qt.resolvedUrl("SettingsPage.qml") }
         }
 
-        Column {
+        header: PageHeader {
             width: parent.width
+            title: settings.locationName
+        }
 
-            PageHeader {
-                width: parent.width
-                title: settings.locationName
+        model: prayerModel
+
+        delegate: Item {
+            width: view.width
+            height: Theme.itemSizeSmall
+
+            Label {
+                height: Theme.itemSizeSmall
+                anchors {
+                    left: parent.left
+                    leftMargin: Theme.paddingLarge
+                    top: parent.top
+                }
+
+                width: (parent.width / 2) - Theme.paddingSmall
+                text: name
             }
 
-            Row {
-                width: parent.width
-
-                Label {
-                    width: parent.width / 2
-                    text: qsTr("Fajr")
+            Label {
+                height: Theme.itemSizeSmall
+                anchors {
+                    right: parent.right
+                    rightMargin: Theme.paddingLarge
+                    top: parent.top
                 }
 
-                Label {
-                    width: parent.width / 2
-                    text: Qt.formatDateTime(calculator.fajrTime, "hh:mm")
-                }
+                width: (parent.width / 2) - Theme.paddingLarge
+                horizontalAlignment: Text.AlignRight
+                text: "%1".arg(Qt.formatDateTime(stamp, "hh:mm"))
             }
+        }
 
-            Row {
-                width: parent.width
-                Label {
-                    width: parent.width / 2
-                    text: qsTr("Sunrise")
-                }
-
-                Label {
-                    width: parent.width / 2
-                    text: Qt.formatDateTime(calculator.sunriseTime, "hh:mm")
-                }
-            }
-
-            Row {
-                width: parent.width
-                Label {
-                    width: parent.width / 2
-                    text: qsTr("Dhuhr")
-                }
-
-                Label {
-                    width: parent.width / 2
-                    text: Qt.formatDateTime(calculator.dhuhrTime, "hh:mm")
-                }
-            }
-
-            Row {
-                width: parent.width
-                Label {
-                    width: parent.width / 2
-                    text: qsTr("Asr")
-                }
-
-                Label {
-                    width: parent.width / 2
-                    text: Qt.formatDateTime(calculator.asrTime, "hh:mm")
-                }
-            }
-
-            Row {
-                width: parent.width
-                Label {
-                    width: parent.width / 2
-                    text: qsTr("Maghrib")
-                }
-
-                Label {
-                    width: parent.width / 2
-                    text: Qt.formatDateTime(calculator.maghribTime, "hh:mm")
-                }
-            }
-
-            Row {
-                width: parent.width
-                Label {
-                    width: parent.width / 2
-                    text: qsTr("Isha")
-                }
-
-                Label {
-                    width: parent.width / 2
-                    text: Qt.formatDateTime(calculator.ishaTime, "hh:mm")
-                }
-            }
+        footer: Label {
+            x: Theme.paddingLarge
+            width: parent.width
+            color: Theme.highlightColor
+            text: qsTr("* Next day prayer")
         }
     }
 }
