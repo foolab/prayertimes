@@ -27,7 +27,7 @@ class Settings : public QSettings {
   Q_PROPERTY(qreal longitude READ longitude WRITE setLongitude NOTIFY longitudeChanged);
   Q_PROPERTY(qreal latitude READ latitude WRITE setLatitude NOTIFY latitudeChanged);
   Q_PROPERTY(QString locationName READ locationName WRITE setLocationName NOTIFY locationNameChanged);
-  Q_PROPERTY(int locationAltitude READ locationAltitude WRITE setLocationAltitude NOTIFY locationAltitudeChanged);
+  Q_PROPERTY(int altitude READ altitude WRITE setAltitude NOTIFY altitudeChanged);
   Q_PROPERTY(int calculationMethod READ calculationMethod WRITE setCalculationMethod NOTIFY calculationMethodChanged);
 
 public:
@@ -43,8 +43,8 @@ public:
   QString locationName() const;
   void setLocationName(const QString& locationName);
 
-  int locationAltitude() const;
-  void setLocationAltitude(int locationAltitude);
+  int altitude() const;
+  void setAltitude(int altitude);
 
   int calculationMethod() const;
   void setCalculationMethod(int calculationMethod);
@@ -53,7 +53,7 @@ signals:
   void longitudeChanged();
   void latitudeChanged();
   void locationNameChanged();
-  void locationAltitudeChanged();
+  void altitudeChanged();
   void calculationMethodChanged();
 };
 
