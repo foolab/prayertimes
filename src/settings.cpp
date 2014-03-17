@@ -28,7 +28,7 @@
 
 #define DEFAULT_LONGITUDE               qreal(31.233333)
 #define DEFAULT_LATITUDE                qreal(30.05)
-#define DEFAULT_ALTITUDE                29
+#define DEFAULT_ALTITUDE                qreal(29.0)
 #define DEFAULT_LOCATION_NAME           "Cairo"
 #define DEFAULT_CALCULATION_METHOD      int(prayertimes::Egypt)
 
@@ -74,12 +74,12 @@ void Settings::setLocationName(const QString& locationName) {
   }
 }
 
-int Settings::altitude() const {
-  return value("location/altitude", DEFAULT_ALTITUDE).toInt();
+qreal Settings::altitude() const {
+  return value("location/altitude", DEFAULT_ALTITUDE).toReal();
 }
 
-void Settings::setAltitude(int altitude) {
-  if (Settings::altitude() != altitude) {
+void Settings::setAltitude(qreal altitude) {
+  if (!qFuzzyCompare(Settings::altitude(), altitude)) {
     setValue("location/altitude", altitude);
     emit altitudeChanged();
   }
