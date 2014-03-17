@@ -23,7 +23,10 @@ Page {
 
     PrayerTimeCalculator {
         id: calculator
-        Component.onCompleted: calculate(settings.longitude, settings.latitude, settings.altitude, settings.calculationMethod)
+        longitude: settings.longitude
+        latitude: settings.latitude
+        altitude: settings.altitude
+        calculationMethod: settings.calculationMethod
     }
 
     property list<QtObject> prayerModel: [

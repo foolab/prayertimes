@@ -28,7 +28,11 @@
 #define ISHA_POSITION         prayertimes::Isha
 
 PrayerTimeCalculator::PrayerTimeCalculator(QObject *parent) :
-  QObject(parent) {
+  QObject(parent),
+  m_longitude(-1),
+  m_latitude(-1),
+  m_altitude(-1),
+  m_calculationMethod(-1) {
 
 }
 
@@ -36,15 +40,67 @@ PrayerTimeCalculator::~PrayerTimeCalculator() {
 
 }
 
-void PrayerTimeCalculator::calculate(qreal longitude, qreal latitude, int altitude, int calculationMethod) {
+qreal PrayerTimeCalculator::longitude() const {
+  return m_longitude;
+}
+
+void PrayerTimeCalculator::setLongitude(qreal longitude) {
+  if (!qFuzzyCompare(m_longitude, longitude)) {
+    m_longitude = longitude;
+    emit longitudeChanged();
+    calculate();
+  }
+}
+
+qreal PrayerTimeCalculator::latitude() const {
+  return m_latitude;
+}
+
+void PrayerTimeCalculator::setLatitude(qreal latitude) {
+  if (!qFuzzyCompare(m_latitude, latitude)) {
+    m_latitude = latitude;
+    emit latitudeChanged();
+    calculate();
+  }
+}
+
+qreal PrayerTimeCalculator::altitude() const {
+  return m_altitude;
+}
+
+void PrayerTimeCalculator::setAltitude(qreal altitude) {
+  if (!qFuzzyCompare(m_altitude, altitude)) {
+    m_altitude = altitude;
+    emit altitudeChanged();
+    calculate();
+  }
+}
+
+int PrayerTimeCalculator::calculationMethod() const {
+  return m_calculationMethod;
+}
+
+void PrayerTimeCalculator::setCalculationMethod(int calculationMethod) {
+  if (m_calculationMethod != calculationMethod) {
+    m_calculationMethod = calculationMethod;
+    emit calculationMethodChanged();
+    calculate();
+  }
+}
+
+void PrayerTimeCalculator::calculate() {
+  if (m_longitude < 0 || m_latitude < 0 || m_altitude < 0 || m_calculationMethod < 0) {
+    return;
+  }
+
   prayertimes::PrayerTimes times;
   time_t date = time(NULL);
   qreal timezone = prayertimes::PrayerTimes::get_timezone(date);
   qDebug() << timezone;
   double output[prayertimes::TimesCount];
 
-  times.set_calc_method(static_cast<prayertimes::CalculationMethod>(calculationMethod));
-  times.get_prayer_times(date, latitude, longitude, altitude, timezone, output);
+  times.set_calc_method(static_cast<prayertimes::CalculationMethod>(m_calculationMethod));
+  times.get_prayer_times(date, m_latitude, m_longitude, m_altitude, timezone, output);
   m_times.clear();
 
   QList<int> positions;
