@@ -32,7 +32,7 @@ class PrayerTimeCalculator : public QObject {
   Q_PROPERTY(QDateTime asrTime READ asrTime NOTIFY prayerTimesChanged);
   Q_PROPERTY(QDateTime maghribTime READ maghribTime NOTIFY prayerTimesChanged);
   Q_PROPERTY(QDateTime ishaTime READ ishaTime NOTIFY prayerTimesChanged);
-
+  Q_PROPERTY(bool ishaIsNextDay READ ishaIsNextDay NOTIFY prayerTimesChanged);
 public:
   PrayerTimeCalculator(QObject *parent = 0);
   ~PrayerTimeCalculator();
@@ -43,6 +43,8 @@ public:
   QDateTime asrTime() const;
   QDateTime maghribTime() const;
   QDateTime ishaTime() const;
+
+  bool ishaIsNextDay() const;
 
 public slots:
   void calculate(qreal longitude, qreal latitude, int altitude, int calculationMethod);

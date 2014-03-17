@@ -55,7 +55,7 @@ Page {
         QtObject {
             property variant stamp: calculator.ishaTime
             property string name: qsTr("Isha")
-            property bool nextDay
+            property bool nextDay: calculator.ishaIsNextDay
         }
     ]
 
@@ -102,11 +102,12 @@ Page {
 
                 width: (parent.width / 2) - Theme.paddingLarge
                 horizontalAlignment: Text.AlignRight
-                text: "%1".arg(Qt.formatDateTime(stamp, "hh:mm"))
+                text: "%1 %2".arg(Qt.formatDateTime(stamp, "hh:mm")).arg(nextDay ? '*' : ' ')
             }
         }
 
         footer: Label {
+            visible: calculator.ishaIsNextDay
             x: Theme.paddingLarge
             width: parent.width
             color: Theme.highlightColor

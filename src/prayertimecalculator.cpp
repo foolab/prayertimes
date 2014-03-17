@@ -112,3 +112,11 @@ QDateTime PrayerTimeCalculator::ishaTime() const {
   return get(ISHA_POSITION);
 }
 
+bool PrayerTimeCalculator::ishaIsNextDay() const {
+  if (!m_times.contains(ISHA_POSITION)) {
+    return false;
+  }
+
+  double time = m_times[ISHA_POSITION];
+  return time >= 86400;
+}
