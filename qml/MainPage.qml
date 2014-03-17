@@ -26,90 +26,100 @@ Page {
         Component.onCompleted: calculate(settings.longitude, settings.latitude, settings.calculationMethod)
     }
 
-    Column {
-        width: parent.width
+    SilicaFlickable {
+        anchors.fill: parent
 
-        PageHeader {
-            width: parent.width
-            title: settings.locationName
+        PullDownMenu {
+            MenuItem { text: qsTr("About"); onClicked: Qt.resolvedUrl("AboutPage.qml") }
+            MenuItem { text: qsTr("Location"); onClicked: Qt.resolvedUrl("LocationPage.qml") }
+            MenuItem { text: qsTr("Settings"); onClicked: Qt.resolvedUrl("SettingsPage.qml") }
         }
 
-        Row {
+        Column {
             width: parent.width
 
-            Label {
-                width: parent.width / 2
-                text: qsTr("Fajr")
+            PageHeader {
+                width: parent.width
+                title: settings.locationName
             }
 
-            Label {
-                width: parent.width / 2
-                text: Qt.formatDateTime(calculator.fajrTime, "hh:mm")
-            }
-        }
+            Row {
+                width: parent.width
 
-        Row {
-            width: parent.width
-            Label {
-                width: parent.width / 2
-                text: qsTr("Sunrise")
-            }
+                Label {
+                    width: parent.width / 2
+                    text: qsTr("Fajr")
+                }
 
-            Label {
-                width: parent.width / 2
-                text: Qt.formatDateTime(calculator.sunriseTime, "hh:mm")
-            }
-        }
-
-        Row {
-            width: parent.width
-            Label {
-                width: parent.width / 2
-                text: qsTr("Dhuhr")
+                Label {
+                    width: parent.width / 2
+                    text: Qt.formatDateTime(calculator.fajrTime, "hh:mm")
+                }
             }
 
-            Label {
-                width: parent.width / 2
-                text: Qt.formatDateTime(calculator.dhuhrTime, "hh:mm")
-            }
-        }
+            Row {
+                width: parent.width
+                Label {
+                    width: parent.width / 2
+                    text: qsTr("Sunrise")
+                }
 
-        Row {
-            width: parent.width
-            Label {
-                width: parent.width / 2
-                text: qsTr("Asr")
-            }
-
-            Label {
-                width: parent.width / 2
-                text: Qt.formatDateTime(calculator.asrTime, "hh:mm")
-            }
-        }
-
-        Row {
-            width: parent.width
-            Label {
-                width: parent.width / 2
-                text: qsTr("Maghrib")
+                Label {
+                    width: parent.width / 2
+                    text: Qt.formatDateTime(calculator.sunriseTime, "hh:mm")
+                }
             }
 
-            Label {
-                width: parent.width / 2
-                text: Qt.formatDateTime(calculator.maghribTime, "hh:mm")
-            }
-        }
+            Row {
+                width: parent.width
+                Label {
+                    width: parent.width / 2
+                    text: qsTr("Dhuhr")
+                }
 
-        Row {
-            width: parent.width
-            Label {
-                width: parent.width / 2
-                text: qsTr("Isha")
+                Label {
+                    width: parent.width / 2
+                    text: Qt.formatDateTime(calculator.dhuhrTime, "hh:mm")
+                }
             }
 
-            Label {
-                width: parent.width / 2
-                text: Qt.formatDateTime(calculator.ishaTime, "hh:mm")
+            Row {
+                width: parent.width
+                Label {
+                    width: parent.width / 2
+                    text: qsTr("Asr")
+                }
+
+                Label {
+                    width: parent.width / 2
+                    text: Qt.formatDateTime(calculator.asrTime, "hh:mm")
+                }
+            }
+
+            Row {
+                width: parent.width
+                Label {
+                    width: parent.width / 2
+                    text: qsTr("Maghrib")
+                }
+
+                Label {
+                    width: parent.width / 2
+                    text: Qt.formatDateTime(calculator.maghribTime, "hh:mm")
+                }
+            }
+
+            Row {
+                width: parent.width
+                Label {
+                    width: parent.width / 2
+                    text: qsTr("Isha")
+                }
+
+                Label {
+                    width: parent.width / 2
+                    text: Qt.formatDateTime(calculator.ishaTime, "hh:mm")
+                }
             }
         }
     }
