@@ -68,7 +68,7 @@ Page {
 
         PullDownMenu {
             MenuItem { text: qsTr("About"); onClicked: Qt.resolvedUrl("AboutPage.qml") }
-            MenuItem { text: qsTr("Location"); onClicked: Qt.resolvedUrl("LocationPage.qml") }
+            MenuItem { text: qsTr("Change city"); onClicked: pageStack.push(Qt.resolvedUrl("LocationPage.qml")) }
             MenuItem { text: qsTr("Settings"); onClicked: Qt.resolvedUrl("SettingsPage.qml") }
         }
 
